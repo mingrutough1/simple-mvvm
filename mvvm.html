@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="inputText.a">
+      <div>
+        {{inputText.a}}
+      </div>
+    </div>
+    <script src="watcher.js"></script>    
+    <script src="compile.js"></script>
+    <script src="observer.js"></script>
+    <script src="mvvm.js"></script>    
+    <script>
+      const vm = new Mvvm({
+        el: '#app',
+        data: {
+          inputText: {
+            a: 'fdasf'
+          }
+        },
+      });
+    </script>
+  </body>
+</html>
