@@ -8,7 +8,9 @@ class Compile {
       let fragment = this.node2fragment(this.el);
       // 编译得到v-model 以及 {{}}
       this.compile(fragment);
-      this.el.appendChild(fragment);      
+
+      this.el.appendChild(fragment);    
+
     }
   }
 
@@ -27,7 +29,12 @@ class Compile {
   }
   compileText(node) { // 处理{{}}
     let text = node.textContent; // 
-    let reg = /\{\{([^{]+)\}\}/g; // 注意{{a}} {{b}}这种情况
+    // {}默认是重复类。{n}表示匹配n次，所以要进行转义
+    // []是字符类，表示有一系列字符可供选择，只要匹配其中一个就可以了。
+    // ^叫脱字符。如果方括号内的第一个字符是[^]，则表示除了字符类之中的字符，其他字符都可以匹配
+    // +叫量词符。表示某个模式出现一次或多次。等同于{1, }
+    // ()表示分组匹配。括号中的模式可以用来匹配分组的内容。通常用来提取子串
+    let reg = /\{\{([^{]+)\}\}/g; // 注意{{a}} {{b}}这种情况 
     if (reg.test(text)) { 
       CompileUtils['text'](node, this.vm, text);
     }
@@ -81,7 +88,7 @@ CompileUtils = {
     expr.replace(/\{\{([^{]+)\}\}/g, (...arguments) => { // 
       new Watcher(vm, arguments[1], (newValue) => { //监控多个{{}} 中的值
         updateFn && updateFn(node, this.getTextVal(vm, expr));      
-      })   
+      })    
     });
     updateFn && updateFn(node, this.getTextVal(vm, expr));
   },

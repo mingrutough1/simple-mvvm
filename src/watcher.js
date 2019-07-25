@@ -5,7 +5,6 @@ class Watcher {
     this.expr = expr;
     this.cb = cb;
     this.oldValue = this.get();
-    
   }
   get() { 
     Dep.target = this;

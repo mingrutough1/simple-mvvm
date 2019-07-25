@@ -19,7 +19,7 @@ class Observer {
       enumerable: true,
       configurable: true,
       get() { 
-        Dep.target&&dep.addSub(Dep.target); // 充分利用js的单线程特点
+        Dep.target&&dep.addSub(Dep.target); // 
         return value;
       },
       set(newValue) { 

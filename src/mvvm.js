@@ -6,8 +6,8 @@ class Mvvm {
 
     if (this.$el) { 
       new Observer(this.$data);   
-      this.proxyData();   
       new Compile(this.$el, this);
+      this.proxyData();   
     }
   }
   proxyData() {
@@ -22,9 +22,5 @@ class Mvvm {
         }
       });
     });
-    // 下面方法不行，它不能复制get和set。
-    // Object.keys(data).forEach(key => {
-    //   this[key]=data[key];
-    // });
   }
 };
